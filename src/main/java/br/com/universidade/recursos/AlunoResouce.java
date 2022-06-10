@@ -1,9 +1,7 @@
 package br.com.universidade.recursos;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -12,13 +10,11 @@ import javax.ws.rs.Produces;
 import br.com.universidade.models.Aluno;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
 import javax.ws.rs.core.MediaType;
 
 @Path("/alunos")
 @Produces(MediaType.APPLICATION_JSON)
-public class AlunoResouce implements Serializable {
-
+public class AlunoResouce {
 
     @GET
     public List<Aluno> pegarAlunos() {
@@ -43,17 +39,15 @@ public class AlunoResouce implements Serializable {
     public void criarALuno(){
         Aluno aluno = new Aluno();
         aluno.setIdade(20);
-        aluno.setNome("Douglas");
+        aluno.setNome("vaaaai");
         aluno.setMatricula(9090L);
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("universidadePU");
-        EntityManager entityManager = (EntityManager) entityManagerFactory.createEntityManager();
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
 
         entityManager.getTransaction().begin();
-        entityManager.merge(aluno);
+        entityManager.persist(aluno);
         entityManager.getTransaction().commit();
-        entityManager.close();
-        
         
     }
 

@@ -1,6 +1,5 @@
 package br.com.universidade.recursos;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,7 +16,7 @@ import javax.ws.rs.core.MediaType;
 
 @Path("/alunos")
 @Produces(MediaType.APPLICATION_JSON)
-public class AlunoResouce implements Serializable {
+public class AlunoResouce {
 
 
     @GET
@@ -40,20 +39,21 @@ public class AlunoResouce implements Serializable {
     }
 
     @POST
-    public void criarALuno(){
+    public String criarALuno(){
         Aluno aluno = new Aluno();
-        aluno.setIdade(20);
-        aluno.setNome("Douglas");
+        aluno.setIdade(22);
+        aluno.setNome("Geraldo");
         aluno.setMatricula(9090L);
 
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("universidadePU");
-        EntityManager entityManager = (EntityManager) entityManagerFactory.createEntityManager();
-
+        EntityManager entityManager = entityManagerFactory.createEntityManager();
+        
         entityManager.getTransaction().begin();
         entityManager.merge(aluno);
         entityManager.getTransaction().commit();
-        entityManager.close();
-        
+
+        return "Funcionou!";
+       
         
     }
 

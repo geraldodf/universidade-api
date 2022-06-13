@@ -3,11 +3,8 @@ package br.com.universidade.recursos;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+
 import br.com.universidade.models.Aluno;
 import br.com.universidade.services.AlunoService;
 
@@ -39,6 +36,11 @@ public class AlunoResouce {
     @POST
     public Aluno criarALuno(Aluno aluno) throws Exception {
         return alunoService.criarALuno(aluno);
+    }
+
+    @PUT
+    public Aluno atualizarALuno(Aluno aluno) throws Exception {
+        return alunoService.atualizarAluno(aluno);
     }
 
 }

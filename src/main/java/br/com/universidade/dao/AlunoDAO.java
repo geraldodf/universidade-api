@@ -28,4 +28,11 @@ public class AlunoDAO {
         return entityManager.find(Aluno.class, id);
     }
 
+    public Aluno atualizarAluno(Aluno aluno) {
+        entityManager.getTransaction().begin();
+        entityManager.merge(aluno);
+        entityManager.getTransaction().commit();
+        entityManager.close();
+        return aluno;
+    }
 }

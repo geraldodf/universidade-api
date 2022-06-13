@@ -1,14 +1,16 @@
 package br.com.universidade.recursos;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import br.com.universidade.models.Aluno;
+import br.com.universidade.services.AlunoService;
+
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
@@ -18,43 +20,25 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class AlunoResouce {
 
+    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("universidadePU");
+    EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+    AlunoService alunoService = new AlunoService();
 
     @GET
-    public List<Aluno> pegarAlunos() {
-        Aluno aluno = new Aluno();
-        aluno.setIdade(20);
-        aluno.setNome("Douglas");
-        aluno.setMatricula(9090L);
+    public ArrayList<Aluno> pegarTodosAlunos() {
+        return alunoService.pegarTodosAlunos();
+    }
 
-        Aluno aluno1 = new Aluno();
-        aluno1.setIdade(22);
-        aluno1.setNome("Geraldo");
-        aluno1.setMatricula(808L);
-      
-        List<Aluno> alunos = new ArrayList<Aluno>();
-        alunos.add(aluno1);
-        alunos.add(aluno);
-
-        return alunos;
+    @GET
+    @Path("/{id}")
+    public Aluno pegarAlunoPeloId(@PathParam("id") int id) throws Exception{
+        return alunoService.pegarAlunoPeloId(id);
     }
 
     @POST
-    public String criarALuno(){
-        Aluno aluno = new Aluno();
-        aluno.setIdade(22);
-        aluno.setNome("Geraldo");
-        aluno.setMatricula(9090L);
-
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("universidadePU");
-        EntityManager entityManager = entityManagerFactory.createEntityManager();
-        
-        entityManager.getTransaction().begin();
-        entityManager.merge(aluno);
-        entityManager.getTransaction().commit();
-
-        return "Funcionou!";
-       
-        
+    public Aluno criarALuno(Aluno aluno) throws Exception {
+        return alunoService.criarALuno(aluno);
     }
 
 }

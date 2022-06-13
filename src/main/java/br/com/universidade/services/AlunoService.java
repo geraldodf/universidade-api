@@ -35,4 +35,10 @@ public class AlunoService {
     public Aluno pegarAlunoPeloId(int id) throws Exception {
         return alunoDao.pegarAlunoPeloId(id);
     }
+
+    public Aluno atualizarAluno(Aluno aluno) throws Exception {
+        verificarAluno(aluno);
+        if(pegarAlunoPeloId(aluno.getId()) == null) throw new Exception("O aluno precisa de um nome válido com mais de 4 caracteres");
+        return alunoDao.atualizarAluno(aluno);
+    }
 }

@@ -3,11 +3,7 @@ package br.com.universidade.recursos;
 import java.util.ArrayList;
 
 import javax.persistence.EntityManager;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import br.com.universidade.models.Aluno;
 import br.com.universidade.services.AlunoService;
 
@@ -32,13 +28,31 @@ public class AlunoResouce {
 
     @GET
     @Path("/{id}")
-    public Aluno pegarAlunoPeloId(@PathParam("id") int id) throws Exception{
+    public Aluno pegarAlunoPeloId(@PathParam("id") int id) throws Exception {
         return alunoService.pegarAlunoPeloId(id);
+    }
+
+    @GET
+    @Path("/query/nome-aluno") 
+    public ArrayList<Aluno> pesquisarAlunoPorNome(@QueryParam ("nome") String nome){
+        return alunoService.pesquisarAlunoPeloNome(nome);
     }
 
     @POST
     public Aluno criarALuno(Aluno aluno) throws Exception {
         return alunoService.criarALuno(aluno);
+    }
+
+    @PUT
+    @Path("/{id}")
+    public Aluno atualizarAluno(@PathParam ("id") int id, Aluno aluno) throws Exception {
+        return alunoService.atualizarAluno(aluno, id);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public void excluirAluno(@PathParam ("id") int id){
+        alunoService.excluirAluno(id);
     }
 
 }

@@ -1,23 +1,15 @@
 package br.com.universidade.recursos;
 
 import java.util.ArrayList;
-
-import javax.persistence.EntityManager;
 import javax.ws.rs.*;
 import br.com.universidade.models.Aluno;
 import br.com.universidade.services.AlunoService;
-
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 import javax.ws.rs.core.MediaType;
 
-@Path("/alunos")
-@Produces(MediaType.APPLICATION_JSON)
+// Camada onde irá ser recebida todas as requisições!
+@Path("/alunos") // Configurando o endpoint do recurso
+@Produces(MediaType.APPLICATION_JSON) // Configuração para mostrar que esse recurso retorna um objeto do tipo JSON
 public class AlunoResouce {
-
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("universidadePU");
-    EntityManager entityManager = entityManagerFactory.createEntityManager();
 
     AlunoService alunoService = new AlunoService();
 
@@ -27,14 +19,14 @@ public class AlunoResouce {
     }
 
     @GET
-    @Path("/{id}")
+    @Path("/{id}") //Configurando o endpoint a ser consumido para essa requisição, recebimento do id pela url.
     public Aluno pegarAlunoPeloId(@PathParam("id") int id) throws Exception {
         return alunoService.pegarAlunoPeloId(id);
     }
 
     @GET
-    @Path("/query/nome-aluno") 
-    public ArrayList<Aluno> pesquisarAlunoPorNome(@QueryParam ("nome") String nome){
+    @Path("/query/nome")//Configurando o endpoint a ser consumido para essa requisição, recebimento do nome do aluno.
+    public ArrayList<Aluno> pesquisarAlunoPorNome(@QueryParam("nome") String nome) {
         return alunoService.pesquisarAlunoPeloNome(nome);
     }
 
@@ -45,13 +37,13 @@ public class AlunoResouce {
 
     @PUT
     @Path("/{id}")
-    public Aluno atualizarAluno(@PathParam ("id") int id, Aluno aluno) throws Exception {
+    public Aluno atualizarAluno(@PathParam("id") int id, Aluno aluno) throws Exception {
         return alunoService.atualizarAluno(aluno, id);
     }
 
     @DELETE
     @Path("/{id}")
-    public void excluirAluno(@PathParam ("id") int id){
+    public void excluirAluno(@PathParam("id") int id) {
         alunoService.excluirAluno(id);
     }
 

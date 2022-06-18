@@ -1,12 +1,10 @@
 package br.com.universidade.services;
 
 import java.util.ArrayList;
-
-
-
 import br.com.universidade.dao.AlunoDAO;
 import br.com.universidade.models.Aluno;
 
+// Camada Service onde irá ter todas regras de negócio!
 public class AlunoService {
 
     AlunoDAO alunoDao = new AlunoDAO();
@@ -38,10 +36,11 @@ public class AlunoService {
     public void excluirAluno(int id) {
         alunoDao.excluirAluno(id);
     }
-    
+
     public ArrayList<Aluno> pesquisarAlunoPeloNome(String nome) {
-       return alunoDao.pesquisarAlunoPeloNome(nome);
+        return alunoDao.pesquisarAlunoPeloNome(nome);
     }
+
     void verificarAluno(Aluno aluno) throws Exception {
         if (aluno.getIdade() == null) {
             throw new Exception("O aluno precisa de uma idade para ser cadastrado!!");
@@ -55,8 +54,5 @@ public class AlunoService {
             throw new Exception("O aluno precisa de um nome válido com mais de 4 caracteres");
         }
     }
-
-
- 
 
 }

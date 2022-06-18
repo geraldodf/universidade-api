@@ -8,7 +8,6 @@
   <artifactId>universidade-api</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
-
   <name>universidade-api</name>
 
   <properties>
@@ -19,50 +18,25 @@
 
   <dependencies>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.11</version>
-      <scope>test</scope>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId> <!-- Dependencia para os testes -->
+        <version>4.11</version>
+        <scope>test</scope>
     </dependency>
-  
-    <dependency>
-      <groupId>org.hibernate.orm</groupId>
-      <artifactId>hibernate-core</artifactId>
-      <version>6.0.2.Final</version>
-    </dependency>
-
-    <dependency>
-      <groupId>com.sun.jersey</groupId>
-      <artifactId>jersey-core</artifactId>
-      <version>1.19.4</version>
-    </dependency>
-
     <dependency>
         <groupId>javax</groupId>
-        <artifactId>javaee-api</artifactId>
+        <artifactId>javaee-api</artifactId> <!-- Dependencia para usar as anotações para mapear as requisições e uso do hibernate -->
         <version>8.0.1</version>
         <scope>provided</scope>
     </dependency>
-
-    <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.29</version>
-    </dependency>
-
-    <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <version>3.12.0</version>
-    </dependency>
-  
+   
   </dependencies>
 
   <build>
       <plugins>
         <plugin>
           <groupId>org.wildfly.plugins</groupId>
-          <artifactId>wildfly-maven-plugin</artifactId>
+            <artifactId>wildfly-maven-plugin</artifactId>   <!-- Plugin para fazer o Deploy de forma automática usando mvn wildfly:deploy -->
           <version>2.1.0.Beta1</version>
         </plugin>
       </plugins>

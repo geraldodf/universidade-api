@@ -7,6 +7,8 @@
     <persistence-unit name="universidadePU" transaction-type="RESOURCE_LOCAL">
 
         <class>br.com.universidade.models.Aluno</class>
+
+        <!-- Tudo aqui precisa de explicação  -->
         
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
